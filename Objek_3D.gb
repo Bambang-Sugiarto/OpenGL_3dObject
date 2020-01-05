@@ -1,0 +1,186 @@
+DIM PCAMX# = 0
+DIM PCAMY# = 0
+DIM PCAMZ# = 8
+
+DIM PREFX# = 0
+DIM PREFY# = 0
+DIM PREFZ# = -1
+
+Dim speed# = 0.001 
+
+'variabel untuk menampung tekstur
+Dim teksturku
+
+'load gambar 
+teksturku = loadmipmaptexture("gambar/kayu.jpg")
+
+glEnable(GL_TEXTURE_2D)
+
+
+while true     
+glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
+glLoadIdentity()
+GLULOOKAT(PCAMX#,PCAMY#,PCAMZ#,PREFX#,PREFY#,PREFZ#,0,1,0) 
+glBindTexture(GL_TEXTURE_2D, teksturku)
+GLBEGIN(GL_TRIANGLES) 'SISI DEPAN   
+    glTexCoord2f(0,0)
+    GLVERTEX3F(-1,-1,-4)
+    
+    glTexCoord2f(1,0)
+    GLVERTEX3F(0,1,-4)
+    
+    glTexCoord2f(0.5,1)  
+    GLVERTEX3F(1,-1,-4)     'ksnsn bawah
+
+GLEND()          
+
+
+GLBEGIN(GL_TRIANGLES) 'SISI BELAKANG
+ 
+    glTexCoord2f(0,0)
+    GLVERTEX3F(-1,-1,4)
+
+    glTexCoord2f(1,0)
+    GLVERTEX3F(0,1,4)
+    
+    glTexCoord2f(0.5,1)
+    GLVERTEX3F(1,-1,4)
+
+GLEND()
+
+GLBEGIN(GL_QUADS) 'sisi kanan
+    glTexCoord2f(1,1)
+    GLVERTEX3F(0,1,-4)
+    
+    glTexCoord2f(0,1)
+    GLVERTEX3F(0,1,4)
+    
+    glTexCoord2f(0,0)
+    GLVERTEX3F(1,-1,4)
+
+    glTexCoord2f(1,0)
+    GLVERTEX3F(1,-1,-4)
+
+GLEND() 
+
+
+GLBEGIN(GL_QUADS) 'sisi KIRI
+    glTexCoord2f(1,1)
+    GLVERTEX3F(0,1,-4)
+    
+    glTexCoord2f(0,1)
+    GLVERTEX3F(0,1,4)
+    
+    glTexCoord2f(0,0)
+    GLVERTEX3F(-1,-1,4)
+    
+    glTexCoord2f(1,0)
+    GLVERTEX3F(-1,-1,-4)
+
+GLEND()
+
+GLBEGIN(GL_QUADS) 'SISI BAWAH 
+    glTexCoord2f(1,1)
+    GLVERTEX3F(-1,-1,-4)
+    
+    glTexCoord2f(0,1)
+    GLVERTEX3F(1,-1,-4)
+    
+    glTexCoord2f(0,0)
+    GLVERTEX3F(1,-1,4)
+    
+    glTexCoord2f(1,0)
+    GLVERTEX3F(-1,-1,4)
+
+GLEND()
+
+GLBEGIN(GL_QUADS) 'SISI DEPAN 
+    glTexCoord2f(1,1)
+    GLVERTEX3F(-1,-1,-4)
+    
+    glTexCoord2f(0,1)
+    GLVERTEX3F(-1,-2,-4)
+    
+    glTexCoord2f(0,0)
+    GLVERTEX3F(1,-2,-4)
+    
+    glTexCoord2f(1,0)
+    GLVERTEX3F(1,-1,-4)
+
+GLEND()
+GLBEGIN(GL_QUADS) 'SISI DEPAN 
+    glTexCoord2f(1,1)
+    GLVERTEX3F(-1,-1,4)
+    
+    glTexCoord2f(0,1)
+    GLVERTEX3F(-1,-2,4)
+    
+    glTexCoord2f(0,0)
+    GLVERTEX3F(1,-2,4)
+    
+    glTexCoord2f(1,0)
+    GLVERTEX3F(1,-1,4)
+
+GLEND() 
+     
+
+GLBEGIN(GL_QUADS) 'SISI KANAN 
+    glTexCoord2f(1,1)
+    GLVERTEX3F(1,-1,-4)
+    
+    glTexCoord2f(0,1)
+    GLVERTEX3F(1,-2,-4)
+    
+    glTexCoord2f(0,0)
+    GLVERTEX3F(1,-2,4)
+    
+    glTexCoord2f(1,0)
+    GLVERTEX3F(1,-1,4)
+
+GLEND()
+
+GLBEGIN(GL_QUADS) 'SISI KANAN 
+    
+    glTexCoord2f(1,1)
+    GLVERTEX3F(-1,-1,-4)
+    
+    glTexCoord2f(0,1)
+    GLVERTEX3F(-1,-2,-4)
+    
+    glTexCoord2f(0,0)
+    GLVERTEX3F(-1,-2,4)
+    
+    glTexCoord2f(1,0)
+    GLVERTEX3F(-1,-1,4)
+
+GLEND() 
+
+GLBEGIN(GL_QUADS) 'SISI BAWAH 
+    glTexCoord2f(1,1)
+    GLVERTEX3F(-1,-2,-4)
+    
+    glTexCoord2f(0,1)
+    GLVERTEX3F(1,-2,-4)
+    
+    glTexCoord2f(0,0)
+    GLVERTEX3F(1,-2,4)
+    
+    glTexCoord2f(1,0)
+    GLVERTEX3F(-1,-2,4)
+
+GLEND()
+
+swapBuffers()
+
+if scankeydown(VK_RIGHT) then 
+pcamx# = pcamx# + speed#
+elseif scankeydown(VK_LEFT) then 
+pcamx# = pcamx# - speed#
+elseif scankeydown(VK_UP) then 
+pcamy# = pcamy# + speed# 
+elseif scankeydown(VK_DOWN) then 
+pcamy# = pcamy# - speed#
+endif
+
+
+wend
